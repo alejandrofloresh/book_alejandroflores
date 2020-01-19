@@ -1,0 +1,106 @@
+<html>
+<head>
+    
+    <!-- Aqui van los estilos CSS para la tabla que tendra el resultado buscado -->
+    <!-- Inicio -->
+    <style> 
+            
+    	table {border-collapse: collapse;}
+    
+    	table thead tr {background-color:#C0C0C0;}
+    
+    	table thead th {padding:5px;border:2px solid #fff;}
+    
+     
+    
+    	table tbody tr {background-color:#f2f5f7;}
+    
+    	table tbody tr:hover {background-color:#e3e9ec;}
+    
+    	table tbody td {border:2px solid #fff;padding:5px;text-align:center;}
+    
+     
+    
+    	table tbody td:last-child, table thead th:last-child {border-right:0px;}
+
+    </style>
+    <!-- Fin -->
+
+</head>
+
+    <body>
+    
+     
+    <!-- Aqui va el codigo PHP -->
+    <!-- Inicio -->
+        <?php
+        /**
+         Generamos la funcion que va a poner los numeros del 1 al 100 con sus respectivos multiplos (3,5)
+         **/
+         
+        /** Inicio **/
+         
+            function multiplos()
+            
+            {
+        /**
+        Cabeceras de la tabla
+        **/
+        /** Inicio **/
+                echo "<table>
+            		<thead>
+            			<tr>
+            				<th>Numero</th>
+            				<th>Multiplo de 3</th>
+            				<th>Multiplo de 5</th>
+                            <th>Multiplo de 3 y 5</th>
+            			</tr>
+            		</thead>
+            		<tbody>";
+        /** Fin **/
+        
+        /**
+        Ciclo del conteo del 1 al 100
+        **/
+        /** Inicio **/
+            			for($i=1;$i<=100;$i++)
+            			{
+            				echo "<tr>";
+                            //Diferenciamos los multiplos de 3 y 5
+            					echo "<td>"; if($i%3 and $i%5){
+            					   echo $i;
+            					}else{
+            					}echo "</td>";
+                                //Obtenemos los multiplos de 3
+            					if($i%3==0)
+            					{
+            						echo "<td>Linio</td>";
+            					}else{
+            						echo "<td></td>";
+            					}
+                                //Obtenemos los multiplos de 5
+            					if($i%5==0)
+            					{
+            						echo "<td>IT</td>";
+            					}else{
+            						echo "<td></td>";
+            					}
+                                //Obtenemos los multiplos de 3 y 5
+            					if($i%5==0 and $i%3==0)
+            					{
+            						echo "<td>Linianos</td>";
+            					}else{
+            						echo "<td></td>";
+            					}
+            				echo "</tr>";
+            
+            			}
+            		echo "</tbody>
+            	</table>";
+            }
+        /** Fin **/    
+            multiplos();
+        /** Fin **/
+        ?>
+    </body>
+</html>
