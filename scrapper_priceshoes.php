@@ -6,9 +6,9 @@
 
   */
 
-  $url = $_GET["url"];
+  $url = $_GET["url"];// -->  se hace un get por url ya que todos los campos estan parametrizados
 
-  $html = file_get_contents($url);
+  $html = file_get_contents($url); // --> se descompone la url y su contenido
   /*DATOS DEL PRODUCTO*/
 
   /*NOMBRE*/
