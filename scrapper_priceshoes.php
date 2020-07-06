@@ -1,5 +1,11 @@
 <?php
 
+  /*
+
+  Este scrapp se conecta directo a la pagina de priceshoes y saca imagenes / disponibilidad / titulos / precio / descripcion
+
+  */
+
   $url = $_GET["url"];
 
   $html = file_get_contents($url);
