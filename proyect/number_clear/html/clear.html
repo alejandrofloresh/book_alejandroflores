@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Sanitizador de Bases de Números Telefónicos</title>
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="../css/footer.css" rel="stylesheet">
+    <link href="../css/header.css" rel="stylesheet">
+    <link href="../css/body.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/4.5.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.js"></script>
+    <script type="text/javascript" src="../js/tablas.js"></script>
+    <script type="text/javascript" src="../js/consulta.js"></script>
+    <script type="text/javascript" src="../js/descargar.js"></script>
+    <script type="text/javascript" src="../js/boton_subir.js"></script>
+    <script type="text/javascript" src="../js/clonar.js"></script>
+  </head>
+  <header>
+      <div class="row justify-content-md-center">
+        <p>
+          <h2>Sanitizador de Bases de Números Telefónicos</h2>
+        </p>
+      </div>
+  </header>
+  <br>
+  <body>
+    <div class="container">
+      <form id="consulta" class="" action="../php/insertar.php" method="post" enctype="multipart/form-data">
+        <div class="row justify-content-md-center row-cols-5">
+          <div class="col">
+            <button class="btn btn-warning" type="button" id="tablas" name="tablas" style="width: 200px;" data-toggle="tooltip" data-html="true" data-placement="bottom" title="Visualización de las tablas existentes<br> Solo interesa la tabla llamada <b>Tabla Principal </b>">Tablas
+              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-view-list" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M3 4.5h10a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1H3zM1 2a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 2zm0 12a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 14z"/>
+              </svg>
+            </button>
+          </div>
+          <div class="col">
+              <button class="btn btn-info" type="button" id="clonar" name="clonar" style="width: 200px;" data-toggle="tooltip" data-placement="bottom" data-html="true" title="Duplica la tabla principal, la limpia y reinicia los contadores en cero<br><em>Importante</em>: esta acción puede afectar la base de datos y pondrías en riesgo la información">Clonar Tabla
+              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z"/>
+              </svg>
+              </button>
+          </div>
+          <div class="col">
+              <label for="file-upload" class="btn btn-secondary" data-toggle="tooltip" data-html="true" data-placement="bottom" title="El único formato aceptado es .XLS (Excel 97-2003)<br> <em>Nota</em>: El nombre del archivo debe llamarse <b>OBLIGATORIAMENTE</b> tmp_archivo_numeros">
+              <i class="fas fa-cloud-upload-alt"></i> Buscar
+              <svg width="6em" height="1.5em" viewBox="0 0 16 16" class="bi bi-arrow-bar-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5zm-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5z"/>
+              </svg>
+              <input id="file-upload" class=""  name="file-upload" onchange='cambiar()' type="file" style='display: none;' accept=".xls,.xlsx">
+              <div id="info"></div>
+              <button type="submit" name="subir" value="Upload">Cargar</button>
+              </label>
+          </div>
+          <div class="col">
+              <button class="btn btn-success" type="button" id="visualizador" name="visualizador" style="width: 200px;" data-toggle="tooltip" data-placement="bottom" title="Muestra los datos ya procesados">Sanitizar <svg width="1em " height="1em" viewBox="0 0 16 16" class="bi bi-file-check-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-1.146 6.854a.5.5 0 0 0-.708-.708L7.5 8.793 6.354 7.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+              </svg>
+              </button>
+          </div>
+          <div class="col">
+              <button class="btn btn-light" type="button" id="visualizador" name="descargar" style="width: 200px;" onclick="exportTableToExcelData('tblData1','NumerosSanitizador')" data-toggle="tooltip" data-placement="bottom" title="Descarga del archivo final, muestra los datos que son válidos y no válidos">Descargar <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cloud-arrow-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M8 2a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13h8.906C14.502 13 16 11.57 16 9.773c0-1.636-1.242-2.969-2.834-3.194C12.923 3.999 10.69 2 8 2zm2.354 6.854l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 9.293V5.5a.5.5 0 0 1 1 0v3.793l1.146-1.147a.5.5 0 0 1 .708.708z"/>
+              </svg>
+              </button>
+          </div>
+          </div>
+          <div id="tablas_consulta" class=""></div><br><br>
+          <div id="tabla" class=""></div>
+          <div id="tabla2" class=""></div>
+       </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../js/tooltip.js"></script>
+  </body>
+  <footer>
+    <div id="footer" >
+      <p>Power By AtonSolution</p>
+    </div>
+  </footer>
+</html>
