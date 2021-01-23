@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Pruebas React</title>
+    <!--librerias necesirias para react-->
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="uno"></div>
+    <div id="dos"></div>
+
+    <script type="text/babel">
+      ReactDOM.render(
+        <h1><center>Hola Mundo!</center></h1>,
+        document.getElementById('uno')
+      );
+    </script>
+
+    <script type="text/babel">
+      ReactDOM.render(
+        <h4><center>Este es el segundo div</center></h4>,
+        document.getElementById('dos')
+      );
+    </script>
+  </body>
+</html>
